@@ -3,17 +3,17 @@ using UnityEngine;
 
 namespace SpellcastStudios
 {
-  public class MeshCombiner 
+  public class MeshCombiner
   {
-  
+
     /// <summary>
     /// Combines meshes and creates a new skinned mesh renderer, parenting to baseBone
     /// </summary>
-    /// <param name="baseBone"></param>
-    /// <param name="material"></param>
-    /// <param name="bones"></param>
-    /// <param name="meshes"></param>
-    /// <param name="rects">Optional UV's to apply to each mesh</param>
+    // baseBone
+    // material
+    // bones
+    // meshes
+    // rects = Optional UV's to apply to each mesh
     /// <returns></returns>
     public static SkinnedMeshRenderer CombineFast(Transform baseBone, Material material, Transform[] bones, Mesh[] meshes, Rect[] rects = null)
     {
@@ -29,16 +29,15 @@ namespace SpellcastStudios
 
         return skinnedMeshRenderer;
     }
-    
-    /// <summary>
+
+
     /// Combines meshes and implements onto an existing skinned mesh renderer + bones
-    /// </summary>
-    /// <param name="skinnedMeshRenderer"></param>
-    /// <param name="baseBone"></param>
-    /// <param name="material"></param>
-    /// <param name="bones"></param>
-    /// <param name="meshes"></param>
-    /// <param name="uvs">Optional UV's to apply to each mesh</param>
+    // skinnedMeshRenderer
+    // baseBone
+    // material
+    // bones
+    // meshes
+    // uvs">Optional UV's to apply to each mesh</param>
     public static void CombineFast(SkinnedMeshRenderer skinnedMeshRenderer, Transform baseBone, Material material, Transform[] bones, Mesh[] meshes, Rect[] uvs=null)
     {
         if (meshes.Length == 0)
@@ -67,11 +66,11 @@ namespace SpellcastStudios
         BoneWeight[] newboneweights = combined_new_mesh.boneWeights;
         Vector2[] newUvs = combined_new_mesh.uv;
 
-        //Blendshape dictionary contains list of matching blendshape indices per mesh. 
+        //Blendshape dictionary contains list of matching blendshape indices per mesh.
         //Index is offset by 1, so 0 = no shape exists for that mesh
         Dictionary<string, int[]> blendshapes = new Dictionary<string, int[]>();
 
-        //Realign boneweights, apply uv's, and map blendshapes 
+        //Realign boneweights, apply uv's, and map blendshapes
         int offset = 0;
         for (int i=0;i<meshes.Length;i++)
         {
@@ -113,8 +112,8 @@ namespace SpellcastStudios
             deltaNormals = new Vector3[combined_new_mesh.vertexCount];
         }
 
-        //We assume all blendshapes only have a single frame, aka 0 (empty) to 1 (full). 
-        //So we just copy the last frame in each blendshape to a weight of 1 
+        //We assume all blendshapes only have a single frame, aka 0 (empty) to 1 (full).
+        //So we just copy the last frame in each blendshape to a weight of 1
         foreach (KeyValuePair<string,int[]> shape in blendshapes)
         {
             offset = 0;
